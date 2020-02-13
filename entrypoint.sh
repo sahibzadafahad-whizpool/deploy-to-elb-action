@@ -7,6 +7,8 @@ chmod 0600 /tmp/key_pair.pem
 
 echo "Describing ASGs..."
 
+cat /tmp/key_pair.pem
+
 INSTANCE_IDS=$(aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names $2 | jq --raw-output '.AutoScalingGroups[0].Instances | map(.InstanceId) | join(";")')
 export IFS=";"
 for instance_id in $INSTANCE_IDS; do \
