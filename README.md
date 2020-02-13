@@ -1,4 +1,4 @@
-# Hello world docker action
+# Deploy to ELB Action
 
 This action executes a remote SSH command on all servers behind a given Amazon ELB (Elastic Load Balancer)
 
