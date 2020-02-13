@@ -1,13 +1,11 @@
 #!/bin/sh -l
 
-echo "Saving SSH key to temporary directory"
+# Save the SSH file to a temporary location so that it can be used later
 
 echo "$3" > /tmp/key_pair.pem
 chmod 0600 /tmp/key_pair.pem
 
-echo "Describing ASGs..."
-
-stat --printf="%s" /tmp/key_pair.pem
+# Describe the Autoscaling group and deploy to all of the servers in the group
 
 INSTANCE_IDS=$(aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names $2 | jq --raw-output '.AutoScalingGroups[0].Instances | map(.InstanceId) | join(";")')
 export IFS=";"
