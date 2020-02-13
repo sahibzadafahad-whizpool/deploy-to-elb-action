@@ -1,16 +1,21 @@
 # action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: "Deploy to ELB"
+description: "Deploys to all servers behind an ELB using remove SSH execution."
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  script: # id of input
+    description: "Script to execute on each remote server"
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    default: "/home/ubuntu/deploy_ci.sh"
+  autoscaling_group_name: # id of input
+    description: Autoscaling group to deploy to
+    required: true
+  ssh_key: # id of input
+    description: Private SSH key to use to authenticate with the server"
+    required: true
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.script }}
+    - ${{ inputs.autoscaling_group_name }}
+    - ${{ inputs.ssh_key }}
