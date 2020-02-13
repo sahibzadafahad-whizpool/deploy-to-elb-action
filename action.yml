@@ -19,3 +19,6 @@ runs:
     - ${{ inputs.script }}
     - ${{ inputs.autoscaling_group_name }}
     - ${{ inputs.ssh_key }}
+branding:
+  icon: 'activity'
+  color: 'blue'
