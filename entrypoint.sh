@@ -2,12 +2,12 @@
 
 echo "Saving SSH key to temporary directory"
 
-echo $3 > /tmp/key_pair.pem
+echo "$3" > /tmp/key_pair.pem
 chmod 0600 /tmp/key_pair.pem
 
 echo "Describing ASGs..."
 
-cat /tmp/key_pair.pem
+stat --printf="%s" /tmp/key_pair.pem
 
 INSTANCE_IDS=$(aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names $2 | jq --raw-output '.AutoScalingGroups[0].Instances | map(.InstanceId) | join(";")')
 export IFS=";"
