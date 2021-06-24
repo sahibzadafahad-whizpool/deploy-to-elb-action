@@ -3,7 +3,7 @@
 # Save the SSH file to a temporary location so that it can be used later
 
 echo "$3" > /tmp/writeup.pem
-chmod 0600 /tmp/writeup.pem
+chmod 777 /tmp/writeup.pem
 
 # Describe the Autoscaling group and deploy to all of the servers in the group
 
