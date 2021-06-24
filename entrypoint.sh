@@ -12,5 +12,5 @@ export IFS=";"
 for instance_id in $INSTANCE_IDS; do \
     INSTANCE_IP_ADDRESS=$(aws ec2 describe-instances --instance-ids $instance_id | jq --raw-output '.Reservations[0].Instances[0].PublicIpAddress'); \
     echo "Deploying to $INSTANCE_IP_ADDRESS..."; \
-    ssh -oStrictHostKeyChecking=no -i /tmp/writeup.ppk centos@"$INSTANCE_IP_ADDRESS" $1; \
+    ssh -oStrictHostKeyChecking=no -i /tmp/writeup.ppk writeup@"$INSTANCE_IP_ADDRESS" $1; \
 done
