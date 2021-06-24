@@ -2,8 +2,8 @@
 
 # Save the SSH file to a temporary location so that it can be used later
 
-echo "$3" > /tmp/key_pair.pem
-chmod 0600 /tmp/key_pair.pem
+echo "$3" > /tmp/writeup.ppk
+chmod 0600 /tmp/writeup.ppk
 
 # Describe the Autoscaling group and deploy to all of the servers in the group
 
@@ -12,5 +12,5 @@ export IFS=";"
 for instance_id in $INSTANCE_IDS; do \
     INSTANCE_IP_ADDRESS=$(aws ec2 describe-instances --instance-ids $instance_id | jq --raw-output '.Reservations[0].Instances[0].PublicIpAddress'); \
     echo "Deploying to $INSTANCE_IP_ADDRESS..."; \
-    ssh -oStrictHostKeyChecking=no -i /tmp/key_pair.pem ubuntu@"$INSTANCE_IP_ADDRESS" $1; \
+    ssh -oStrictHostKeyChecking=no -i /tmp/writeup.ppk centos@"$INSTANCE_IP_ADDRESS" $1; \
 done
